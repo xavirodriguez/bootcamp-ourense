@@ -102,7 +102,7 @@ INSERT INTO Servicios (Nombre, Descripción, Precio) VALUES
 ('Desarrollo de eCommerce', 'Creación de tiendas en línea personalizadas', 1400.00),
 ('Gestor de Contenidos', 'Implementación y configuración de CMS', 800.00),
 ('Auditoría Tecnológica', 'Evaluación y recomendaciones para mejoras tecnológicas', 900.00),
-('Integraciones API', 'Desarrollo y conexión con servicios externos', 1250.00);
+('Integraciones API', 'Desarrollo y conexión con servicios externos', 1250.00),
 ('Ciberseguridad Avanzada', 'Protección integral contra ataques y vulnerabilidades', 1600.00),
 ('Machine Learning', 'Desarrollo de modelos predictivos y análisis de datos', 2000.00),
 ('Automatización Empresarial', 'Optimización de procesos mediante IA y bots', 1800.00),
@@ -113,6 +113,9 @@ INSERT INTO Servicios (Nombre, Descripción, Precio) VALUES
 ('Análisis Forense Digital', 'Investigación y recuperación de datos de ciberataques', 1400.00),
 ('Marketing de Contenidos', 'Creación y gestión de estrategias de contenido digital', 850.00),
 ('Blockchain y Criptografía', 'Desarrollo de soluciones seguras con blockchain', 2200.00);
+
+
+
 
 
 INSERT INTO Contrataciones (ClienteID, ServicioID, FechaContratación, Estado, Notas) VALUES
@@ -126,21 +129,21 @@ INSERT INTO Contrataciones (ClienteID, ServicioID, FechaContratación, Estado, N
 (9, 6, '2024-03-05', 'Completado', 'Migración de datos a la nube con seguridad avanzada'),
 (10, 3, '2024-03-20', 'Cancelado', 'Campaña de SEO para posicionamiento de marca anulada'),
 (7, 8, '2024-04-01', 'En curso', 'Implementación de DevOps en infraestructura existente'),
-(11, 4, '2024-04-10', 'Pendiente', 'Rediseño de interfaz para aplicación móvil'),
-(12, 1, '2024-05-05', 'Completado', 'Auditoría de ciberseguridad y mitigación de riesgos'),
-(13, 2, '2024-05-12', 'En curso', 'Desarrollo de modelo de machine learning para predicciones'),
-(14, 5, '2024-06-01', 'Pendiente', 'Optimización de servidores para carga rápida de sitios web'),
-(15, 9, '2024-06-10', 'Completado', 'Estrategia de marketing de contenidos para redes sociales'),
-(16, 7, '2024-06-15', 'En curso', 'Soporte técnico mensual con atención prioritaria'),
-(17, 10, '2024-07-01', 'Pendiente', 'Consultoría en implementación de blockchain en supply chain'),
-(18, 3, '2024-07-12', 'Completado', 'Optimización de estrategias de SEO para eCommerce'),
-(19, 6, '2024-08-05', 'Cancelado', 'Implementación de procesos de automatización detenida'),
-(20, 8, '2024-08-15', 'En curso', 'Desarrollo de API para integración con plataformas externas'),
-(21, 4, '2024-09-01', 'Pendiente', 'Rediseño de experiencia de usuario en sitio web'),
-(22, 5, '2024-09-10', 'Completado', 'Desarrollo de software de gestión interna para empresa'),
-(23, 1, '2024-10-05', 'En curso', 'Seguridad informática avanzada para infraestructura corporativa'),
-(24, 2, '2024-10-15', 'Pendiente', 'Creación de plataforma de análisis de datos'),
-(25, 9, '2024-11-01', 'Completado', 'Estrategia de marketing digital con enfoque en conversión');
+(1, 4, '2024-04-10', 'Pendiente', 'Rediseño de interfaz para aplicación móvil'),
+(2, 1, '2024-05-05', 'Completado', 'Auditoría de ciberseguridad y mitigación de riesgos'),
+(3, 2, '2024-05-12', 'En curso', 'Desarrollo de modelo de machine learning para predicciones'),
+(4, 5, '2024-06-01', 'Pendiente', 'Optimización de servidores para carga rápida de sitios web'),
+(5, 9, '2024-06-10', 'Completado', 'Estrategia de marketing de contenidos para redes sociales'),
+(6, 7, '2024-06-15', 'En curso', 'Soporte técnico mensual con atención prioritaria'),
+(7, 10, '2024-07-01', 'Pendiente', 'Consultoría en implementación de blockchain en supply chain'),
+(8, 3, '2024-07-12', 'Completado', 'Optimización de estrategias de SEO para eCommerce'),
+(9, 6, '2024-08-05', 'Cancelado', 'Implementación de procesos de automatización detenida'),
+(10, 8, '2024-08-15', 'En curso', 'Desarrollo de API para integración con plataformas externas'),
+(1, 4, '2024-09-01', 'Pendiente', 'Rediseño de experiencia de usuario en sitio web'),
+(2, 5, '2024-09-10', 'Completado', 'Desarrollo de software de gestión interna para empresa'),
+(3, 1, '2024-10-05', 'En curso', 'Seguridad informática avanzada para infraestructura corporativa'),
+(4, 2, '2024-10-15', 'Pendiente', 'Creación de plataforma de análisis de datos'),
+(5, 9, '2024-11-01', 'Completado', 'Estrategia de marketing digital con enfoque en conversión');
 
 
 INSERT INTO Pagos (ContrataciónID, Monto, FechaPago, MétodoPago, Estado) VALUES
@@ -153,22 +156,23 @@ INSERT INTO Pagos (ContrataciónID, Monto, FechaPago, MétodoPago, Estado) VALUE
 (8, 2000.00, '2024-02-22', 'Transferencia', 'Pendiente'),
 (9, 1300.00, '2024-03-05', 'PayPal', 'Pagado'),
 (10, 900.00, '2024-03-20', 'Efectivo', 'Rechazado'),
-(7, 750.00, '2024-04-02', 'Tarjeta', 'Pendiente'),
-(11, 1100.00, '2024-04-15', 'Transferencia', 'Pagado'),
-(12, 1500.00, '2024-05-08', 'PayPal', 'Pagado'),
-(13, 950.00, '2024-05-20', 'Efectivo', 'Pendiente'),
-(14, 1400.00, '2024-06-03', 'Tarjeta', 'Pagado'),
-(15, 800.00, '2024-06-17', 'Transferencia', 'Rechazado'),
-(16, 1700.00, '2024-07-02', 'PayPal', 'Pagado'),
-(17, 850.00, '2024-07-14', 'Efectivo', 'Pendiente'),
-(18, 1800.00, '2024-08-01', 'Tarjeta', 'Pagado'),
-(19, 2200.00, '2024-08-15', 'Transferencia', 'Rechazado'),
-(20, 600.00, '2024-09-01', 'PayPal', 'Pendiente'),
-(21, 1300.00, '2024-09-10', 'Efectivo', 'Pagado'),
-(22, 1000.00, '2024-10-05', 'Tarjeta', 'Pendiente'),
-(23, 1250.00, '2024-10-20', 'Transferencia', 'Pagado'),
-(24, 1600.00, '2024-11-01', 'PayPal', 'Rechazado'),
-(25, 700.00, '2024-11-15', 'Efectivo', 'Pagado');
+(1, 750.00, '2024-04-02', 'Tarjeta', 'Pendiente'),
+(1, 1100.00, '2024-04-15', 'Transferencia', 'Pagado'),
+(2, 1500.00, '2024-05-08', 'PayPal', 'Pagado'),
+(3, 950.00, '2024-05-20', 'Efectivo', 'Pendiente'),
+(4, 1400.00, '2024-06-03', 'Tarjeta', 'Pagado'),
+(5, 800.00, '2024-06-17', 'Transferencia', 'Rechazado'),
+(6, 1700.00, '2024-07-02', 'PayPal', 'Pagado'),
+(7, 850.00, '2024-07-14', 'Efectivo', 'Pendiente'),
+(8, 1800.00, '2024-08-01', 'Tarjeta', 'Pagado'),
+(9, 2200.00, '2024-08-15', 'Transferencia', 'Rechazado'),
+(10, 600.00, '2024-09-01', 'PayPal', 'Pendiente'),
+(1, 1300.00, '2024-09-10', 'Efectivo', 'Pagado'),
+(2, 1000.00, '2024-10-05', 'Tarjeta', 'Pendiente'),
+(3, 1250.00, '2024-10-20', 'Transferencia', 'Pagado'),
+(4, 1600.00, '2024-11-01', 'PayPal', 'Rechazado'),
+(5, 700.00, '2024-11-15', 'Efectivo', 'Pagado');
+
 INSERT INTO Empleados (Nombre, Cargo, Email, Teléfono) VALUES
 ('Ana Sánchez', 'Consultor TI', 'ana.sanchez@empresa.com', '611223344'),
 ('Luis Martínez', 'Diseñador Web', 'luis.martinez@empresa.com', '622334455'),
