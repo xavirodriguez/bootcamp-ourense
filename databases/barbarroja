@@ -1,0 +1,191 @@
+-- Create table for Clients
+CREATE TABLE Clientes (
+    ClienteID INT PRIMARY KEY AUTO_INCREMENT,
+    Tipo ENUM('Empresa', 'Persona') NOT NULL,
+    Nombre VARCHAR(255) NOT NULL,
+    Contacto VARCHAR(255), 
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Teléfono VARCHAR(20),
+    Dirección TEXT
+);
+
+-- Create table for Services
+CREATE TABLE Servicios (
+    ServicioID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(255) NOT NULL,
+    Descripción TEXT,
+    Precio DECIMAL(10,2) NOT NULL
+);
+
+-- Create table for Contracts
+CREATE TABLE Contrataciones (
+    ContrataciónID INT PRIMARY KEY AUTO_INCREMENT,
+    ClienteID INT NOT NULL,
+    ServicioID INT NOT NULL,
+    FechaContratación DATE NOT NULL,
+    Estado ENUM('Pendiente', 'En curso', 'Completado', 'Cancelado') DEFAULT 'Pendiente',
+    Notas TEXT,
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID) ON DELETE CASCADE,
+    FOREIGN KEY (ServicioID) REFERENCES Servicios(ServicioID) ON DELETE CASCADE
+);
+
+-- Create table for Payments
+CREATE TABLE Pagos (
+    PagoID INT PRIMARY KEY AUTO_INCREMENT,
+    ContrataciónID INT NOT NULL,
+    Monto DECIMAL(10,2) NOT NULL,
+    FechaPago DATE NOT NULL,
+    MétodoPago ENUM('Transferencia', 'Tarjeta', 'PayPal', 'Efectivo') NOT NULL,
+    Estado ENUM('Pagado', 'Pendiente', 'Rechazado') DEFAULT 'Pendiente',
+    FOREIGN KEY (ContrataciónID) REFERENCES Contrataciones(ContrataciónID) ON DELETE CASCADE
+);
+
+-- Create table for Employees
+CREATE TABLE Empleados (
+    EmpleadoID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(255) NOT NULL,
+    Cargo VARCHAR(255),
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Teléfono VARCHAR(20)
+);
+
+-- Create table for Assignments
+CREATE TABLE Asignaciones (
+    AsignaciónID INT PRIMARY KEY AUTO_INCREMENT,
+    EmpleadoID INT NOT NULL,
+    ContrataciónID INT NOT NULL,
+    FechaAsignación DATE NOT NULL,
+    FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID) ON DELETE CASCADE,
+    FOREIGN KEY (ContrataciónID) REFERENCES Contrataciones(ContrataciónID) ON DELETE CASCADE
+);
+
+-- Create table for Reports
+CREATE TABLE Informes (
+    InformeID INT PRIMARY KEY AUTO_INCREMENT,
+    ContrataciónID INT NOT NULL,
+    FechaEntrega DATE NOT NULL,
+    Resumen TEXT,
+    ArchivoURL VARCHAR(500),
+    FOREIGN KEY (ContrataciónID) REFERENCES Contrataciones(ContrataciónID) ON DELETE CASCADE
+);
+
+
+INSERT INTO Clientes (Tipo, Nombre, Contacto, Email, Teléfono, Dirección) VALUES
+('Empresa', 'Tech Solutions', 'Carlos Ramírez', 'carlos@techsolutions.com', '600123456', 'Calle Falsa 123, Madrid'),
+('Persona', 'María López', NULL, 'maria.lopez@gmail.com', '622987654', 'Avenida Central 45, Barcelona'),
+('Empresa', 'Green Energy', 'Elena Martín', 'elena@greenenergy.com', '650321789', 'Plaza Mayor 10, Sevilla'),
+('Persona', 'Javier Ruiz', NULL, 'javier.ruiz@yahoo.com', '690567234', 'Calle Ancha 9, Valencia'),
+('Empresa', 'DataSoft', 'Pedro Gómez', 'pedro@datasaft.com', '645789123', 'Gran Vía 5, Bilbao'),
+('Empresa', 'InnovaTech', 'Luis Pérez', 'luis@innovatech.com', '601234567', 'Calle del Progreso 11, Madrid'),
+('Persona', 'Ana Torres', NULL, 'ana.torres@hotmail.com', '623987654', 'Calle Mayor 8, Valencia'),
+('Empresa', 'EcoFuture', 'Raúl Sánchez', 'raul@ecofuture.com', '651321789', 'Paseo del Prado 22, Barcelona'),
+('Persona', 'Diego Fernández', NULL, 'diego.fernandez@gmail.com', '691567890', 'Avenida del Mar 14, Málaga'),
+('Empresa', 'CyberWare', 'Andrea López', 'andrea@cyberware.com', '646789321', 'Calle Libertad 19, Zaragoza'),
+('Empresa', 'SoftWorks', 'Marcos Díaz', 'marcos@softworks.com', '602345678', 'Plaza de la Paz 5, Sevilla'),
+('Persona', 'Elisa Gómez', NULL, 'elisa.gomez@yahoo.com', '624876543', 'Calle Real 23, Coruña'),
+('Empresa', 'SolarisTech', 'Sergio Martín', 'sergio@solaristech.com', '652987654', 'Calle Nueva 30, Bilbao'),
+('Persona', 'Carlos Núñez', NULL, 'carlos.nunez@gmail.com', '692345678', 'Avenida de la Ciencia 15, Salamanca'),
+('Empresa', 'NeuralNet', 'Patricia Suárez', 'patricia@neuralnet.com', '647654321', 'Calle de la Luna 12, Valencia');
+
+INSERT INTO Servicios (Nombre, Descripción, Precio) VALUES
+('Consultoría TI', 'Asesoramiento y soporte en tecnología', 500.00),
+('Diseño Web', 'Creación de sitios web personalizados', 800.00),
+('Marketing Digital', 'Estrategias de marketing online', 700.00),
+('Soporte Técnico', 'Asistencia y mantenimiento de equipos', 400.00),
+('Desarrollo de Software', 'Programación de aplicaciones a medida', 1500.00),
+('Seguridad Informática', 'Protección de sistemas contra amenazas y ataques', 1200.00),
+('Análisis de Datos', 'Interpretación y visualización de datos para toma de decisiones', 950.00),
+('SEO y Posicionamiento', 'Optimización de motores de búsqueda para sitios web', 600.00),
+('Estrategia de Redes Sociales', 'Planificación y ejecución de estrategias digitales', 750.00),
+('Mantenimiento de Servidores', 'Supervisión y actualización de servidores', 1100.00),
+('Automatización de Procesos', 'Implementación de flujos de trabajo automáticos', 1300.00),
+('Desarrollo de eCommerce', 'Creación de tiendas en línea personalizadas', 1400.00),
+('Gestor de Contenidos', 'Implementación y configuración de CMS', 800.00),
+('Auditoría Tecnológica', 'Evaluación y recomendaciones para mejoras tecnológicas', 900.00),
+('Integraciones API', 'Desarrollo y conexión con servicios externos', 1250.00);
+('Ciberseguridad Avanzada', 'Protección integral contra ataques y vulnerabilidades', 1600.00),
+('Machine Learning', 'Desarrollo de modelos predictivos y análisis de datos', 2000.00),
+('Automatización Empresarial', 'Optimización de procesos mediante IA y bots', 1800.00),
+('Consultoría en UX/UI', 'Mejora de experiencia de usuario y diseño de interfaces', 1100.00),
+('Hosting y Servidores', 'Alojamiento web y administración de servidores dedicados', 900.00),
+('Migración a la Nube', 'Traslado de infraestructuras a servicios cloud', 1300.00),
+('Soporte DevOps', 'Implementación y mantenimiento de CI/CD pipelines', 1700.00),
+('Análisis Forense Digital', 'Investigación y recuperación de datos de ciberataques', 1400.00),
+('Marketing de Contenidos', 'Creación y gestión de estrategias de contenido digital', 850.00),
+('Blockchain y Criptografía', 'Desarrollo de soluciones seguras con blockchain', 2200.00);
+
+
+INSERT INTO Contrataciones (ClienteID, ServicioID, FechaContratación, Estado, Notas) VALUES
+(1, 2, '2024-01-10', 'En curso', 'Web corporativa con diseño responsive'),
+(3, 5, '2024-02-15', 'Pendiente', 'Desarrollo de software a medida para gestión interna'),
+(2, 4, '2024-02-20', 'Completado', 'Soporte técnico mensual contratado'),
+(5, 3, '2024-03-01', 'Cancelado', 'Campanña de marketing digital anulada'),
+(4, 1, '2024-03-05', 'En curso', 'Consultoría sobre migración a la nube'),
+(6, 7, '2024-01-12', 'Pendiente', 'Implementación de automatización empresarial'),
+(8, 10, '2024-02-18', 'En curso', 'Integración de blockchain en procesos financieros'),
+(9, 6, '2024-03-05', 'Completado', 'Migración de datos a la nube con seguridad avanzada'),
+(10, 3, '2024-03-20', 'Cancelado', 'Campaña de SEO para posicionamiento de marca anulada'),
+(7, 8, '2024-04-01', 'En curso', 'Implementación de DevOps en infraestructura existente'),
+(11, 4, '2024-04-10', 'Pendiente', 'Rediseño de interfaz para aplicación móvil'),
+(12, 1, '2024-05-05', 'Completado', 'Auditoría de ciberseguridad y mitigación de riesgos'),
+(13, 2, '2024-05-12', 'En curso', 'Desarrollo de modelo de machine learning para predicciones'),
+(14, 5, '2024-06-01', 'Pendiente', 'Optimización de servidores para carga rápida de sitios web'),
+(15, 9, '2024-06-10', 'Completado', 'Estrategia de marketing de contenidos para redes sociales'),
+(16, 7, '2024-06-15', 'En curso', 'Soporte técnico mensual con atención prioritaria'),
+(17, 10, '2024-07-01', 'Pendiente', 'Consultoría en implementación de blockchain en supply chain'),
+(18, 3, '2024-07-12', 'Completado', 'Optimización de estrategias de SEO para eCommerce'),
+(19, 6, '2024-08-05', 'Cancelado', 'Implementación de procesos de automatización detenida'),
+(20, 8, '2024-08-15', 'En curso', 'Desarrollo de API para integración con plataformas externas'),
+(21, 4, '2024-09-01', 'Pendiente', 'Rediseño de experiencia de usuario en sitio web'),
+(22, 5, '2024-09-10', 'Completado', 'Desarrollo de software de gestión interna para empresa'),
+(23, 1, '2024-10-05', 'En curso', 'Seguridad informática avanzada para infraestructura corporativa'),
+(24, 2, '2024-10-15', 'Pendiente', 'Creación de plataforma de análisis de datos'),
+(25, 9, '2024-11-01', 'Completado', 'Estrategia de marketing digital con enfoque en conversión');
+
+
+INSERT INTO Pagos (ContrataciónID, Monto, FechaPago, MétodoPago, Estado) VALUES
+(1, 800.00, '2024-01-15', 'Transferencia', 'Pagado'),
+(3, 400.00, '2024-02-25', 'Tarjeta', 'Pagado'),
+(5, 700.00, '2024-03-10', 'PayPal', 'Pendiente'),
+(2, 1500.00, '2024-02-28', 'Efectivo', 'Pagado'),
+(4, 500.00, '2024-03-12', 'Transferencia', 'Rechazado'),
+(6, 1200.00, '2024-01-18', 'Tarjeta', 'Pagado'),
+(8, 2000.00, '2024-02-22', 'Transferencia', 'Pendiente'),
+(9, 1300.00, '2024-03-05', 'PayPal', 'Pagado'),
+(10, 900.00, '2024-03-20', 'Efectivo', 'Rechazado'),
+(7, 750.00, '2024-04-02', 'Tarjeta', 'Pendiente'),
+(11, 1100.00, '2024-04-15', 'Transferencia', 'Pagado'),
+(12, 1500.00, '2024-05-08', 'PayPal', 'Pagado'),
+(13, 950.00, '2024-05-20', 'Efectivo', 'Pendiente'),
+(14, 1400.00, '2024-06-03', 'Tarjeta', 'Pagado'),
+(15, 800.00, '2024-06-17', 'Transferencia', 'Rechazado'),
+(16, 1700.00, '2024-07-02', 'PayPal', 'Pagado'),
+(17, 850.00, '2024-07-14', 'Efectivo', 'Pendiente'),
+(18, 1800.00, '2024-08-01', 'Tarjeta', 'Pagado'),
+(19, 2200.00, '2024-08-15', 'Transferencia', 'Rechazado'),
+(20, 600.00, '2024-09-01', 'PayPal', 'Pendiente'),
+(21, 1300.00, '2024-09-10', 'Efectivo', 'Pagado'),
+(22, 1000.00, '2024-10-05', 'Tarjeta', 'Pendiente'),
+(23, 1250.00, '2024-10-20', 'Transferencia', 'Pagado'),
+(24, 1600.00, '2024-11-01', 'PayPal', 'Rechazado'),
+(25, 700.00, '2024-11-15', 'Efectivo', 'Pagado');
+INSERT INTO Empleados (Nombre, Cargo, Email, Teléfono) VALUES
+('Ana Sánchez', 'Consultor TI', 'ana.sanchez@empresa.com', '611223344'),
+('Luis Martínez', 'Diseñador Web', 'luis.martinez@empresa.com', '622334455'),
+('Sofía Hernández', 'Especialista en Marketing', 'sofia.hernandez@empresa.com', '633445566'),
+('Diego Fernández', 'Técnico de Soporte', 'diego.fernandez@empresa.com', '644556677'),
+('Elena Gómez', 'Desarrolladora', 'elena.gomez@empresa.com', '655667788');
+
+INSERT INTO Asignaciones (EmpleadoID, ContrataciónID, FechaAsignación) VALUES
+(1, 1, '2024-01-11'),
+(2, 2, '2024-02-16'),
+(3, 3, '2024-02-22'),
+(4, 4, '2024-03-02'),
+(5, 5, '2024-03-06');
+
+INSERT INTO Informes (ContrataciónID, FechaEntrega, Resumen, ArchivoURL) VALUES
+(1, '2024-01-20', 'Informe de diseño web inicial', 'https://example.com/informe1.pdf'),
+(2, '2024-02-18', 'Plan de desarrollo de software', 'https://example.com/informe2.pdf'),
+(3, '2024-02-28', 'Evaluación de soporte técnico', 'https://example.com/informe3.pdf'),
+(4, '2024-03-05', 'Reporte de campaña de marketing', 'https://example.com/informe4.pdf'),
+(5, '2024-03-10', 'Análisis de consultoría TI', 'https://example.com/informe5.pdf');
